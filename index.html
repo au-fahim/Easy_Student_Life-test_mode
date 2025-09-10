@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Student Life v3 - Enhanced Student Management System</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <!-- Sidebar Navigation -->
+      <nav class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Smart Student Life</span>
+          </div>
+        </div>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#" class="nav-link active" data-section="dashboard">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" data-section="schedule">
+              <i class="fas fa-calendar-alt"></i>
+              <span>Schedule</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" data-section="budget">
+              <i class="fas fa-wallet"></i>
+              <span>Budget</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" data-section="study">
+              <i class="fas fa-book-open"></i>
+              <span>Study Planner</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" data-section="quiz">
+              <i class="fas fa-question-circle"></i>
+              <span>Quiz Center</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div class="header-left">
+            <button class="menu-toggle">
+              <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="page-title">Dashboard</h1>
+          </div>
+          <div class="header-right">
+            <div class="notification-btn" id="notificationBtn">
+              <i class="fas fa-bell"></i>
+              <span class="notification-badge" id="notificationBadge">3</span>
+            </div>
+            <div class="user-profile">
+              <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%2333b5c5'%3E%3Cpath d='M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7C14.65 7 14.4 7.35 14.4 7.7L14.65 8.95C15.3 10.15 15.35 11.55 14.65 12.8L13.4 14.95C13.05 15.55 12.35 15.85 11.65 15.85C10.95 15.85 10.25 15.55 9.9 14.95L8.65 12.8C7.95 11.55 8 10.15 8.65 8.95L8.9 7.7C8.9 7.35 8.65 7 8.3 7L3 7V9C3 9.55 3.45 10 4 10L5.65 10C6.45 10 7.05 10.65 6.95 11.45L6.8 12.95C6.7 13.75 7.25 14.45 8.05 14.45L9.4 14.45L10.4 16.25L6 16.25C4.9 16.25 4 17.15 4 18.25S4.9 20.25 6 20.25L18 20.25C19.1 20.25 20 19.35 20 18.25S19.1 16.25 18 16.25L13.6 16.25L14.6 14.45L15.95 14.45C16.75 14.45 17.3 13.75 17.2 12.95L17.05 11.45C16.95 10.65 17.55 10 18.35 10L20 10C20.55 10 21 9.55 21 9Z'/%3E%3C/svg%3E"
+                alt="Profile"
+              />
+              <span id="userName" class="editable-name" onclick="editUserName()"
+                >Ashraf Fahim</span
+              >
+            </div>
+          </div>
+        </header>
+
+        <!-- Content Sections -->
+        <div class="content">
+          <!-- Dashboard Section -->
+          <section class="section active" id="dashboard">
+            <div class="welcome-card">
+              <div class="welcome-content">
+                <h2 id="welcomeMessage">Good evening, Ashraf! 🌙</h2>
+                <p>Here's your overview for today</p>
+              </div>
+              <div class="welcome-stats">
+                <div class="stat-item">
+                  <span class="stat-value" id="todayClassesCount">0</span>
+                  <span class="stat-label">Classes Today</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value" id="pendingTasksCount">0</span>
+                  <span class="stat-label">Pending Tasks</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value" id="availableSavings">৳0</span>
+                  <span class="stat-label">Available Savings</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-grid">
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-icon" style="background: var(--color-bg-1)">
+                    <i class="fas fa-calendar-check"></i>
+                  </div>
+                  <div class="stat-info">
+                    <h3 id="totalClasses">4</h3>
+                    <p>Total Classes</p>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-icon" style="background: var(--color-bg-2)">
+                    <i class="fas fa-coins"></i>
+                  </div>
+                  <div class="stat-info">
+                    <h3 id="currentBalance">৳16,000</h3>
+                    <p>Current Balance</p>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-icon" style="background: var(--color-bg-3)">
+                    <i class="fas fa-tasks"></i>
+                  </div>
+                  <div class="stat-info">
+                    <h3 id="totalStudyTasks">3</h3>
+                    <p>Study Tasks</p>
+                  </div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-icon" style="background: var(--color-bg-4)">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <div class="stat-info">
+                    <h3 id="avgQuizScore">85%</h3>
+                    <p>Quiz Average</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="today-classes">
+                <h3>Today's Classes</h3>
+                <div class="classes-list" id="todayClassesList">
+                  <!-- Classes will be populated by JS -->
+                </div>
+              </div>
+
+              <div class="upcoming-tasks">
+                <h3>Upcoming Deadlines</h3>
+                <div class="tasks-list" id="upcomingTasksList">
+                  <!-- Tasks will be populated by JS -->
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Schedule Section -->
+          <section class="section" id="schedule">
+            <div class="section-header">
+              <h2>Class Schedule Management</h2>
+              <button class="btn btn--primary" id="addClassBtn">
+                <i class="fas fa-plus"></i>
+                Add Class
+              </button>
+            </div>
+
+            <!-- Class Status Sections -->
+            <div class="class-status-tabs">
+              <button class="status-tab active" data-status="all">
+                All Classes
+              </button>
+              <button class="status-tab" data-status="upcoming">
+                Upcoming
+              </button>
+              <button class="status-tab" data-status="completed">
+                Completed
+              </button>
+              <button class="status-tab" data-status="cancelled">
+                Cancelled
+              </button>
+            </div>
+
+            <div class="schedule-grid" id="scheduleGrid">
+              <!-- Schedule will be populated by JS -->
+            </div>
+          </section>
+
+          <!-- Budget Section -->
+          <section class="section" id="budget">
+            <div class="section-header">
+              <h2>Budget Tracker</h2>
+              <div class="header-actions">
+                <button class="btn btn--secondary" id="addSavingsGoalBtn">
+                  <i class="fas fa-piggy-bank"></i>
+                  Add Savings Goal
+                </button>
+                <button class="btn btn--primary" id="addTransactionBtn">
+                  <i class="fas fa-plus"></i>
+                  Add Transaction
+                </button>
+              </div>
+            </div>
+
+            <div class="budget-grid">
+              <div class="budget-summary">
+                <div class="budget-card">
+                  <h3>Total Income</h3>
+                  <p class="amount income" id="totalIncome">৳23,000</p>
+                </div>
+                <div class="budget-card">
+                  <h3>Total Expenses</h3>
+                  <p class="amount expense" id="totalExpenses">৳7,000</p>
+                </div>
+                <div class="budget-card">
+                  <h3>Current Balance</h3>
+                  <p class="amount balance" id="totalBalance">৳16,000</p>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <h3>Expense Breakdown</h3>
+                <div
+                  class="chart-wrapper"
+                  style="position: relative; height: 300px"
+                >
+                  <canvas id="expenseChart"></canvas>
+                </div>
+              </div>
+
+              <div class="savings-goals-section">
+                <div class="section-header">
+                  <h3>Savings Goals (Bank Accounts)</h3>
+                </div>
+                <div class="savings-goals-list" id="savingsGoalsList">
+                  <!-- Savings goals will be populated by JS -->
+                </div>
+              </div>
+
+              <div class="transactions-section">
+                <div class="section-header">
+                  <h3>Transaction History</h3>
+                  <div class="transaction-controls">
+                    <select class="form-control" id="transactionFilter">
+                      <option value="all">All Transactions</option>
+                      <option value="daily">Daily</option>
+                      <option value="weekly">Weekly</option>
+                      <option value="monthly">Monthly</option>
+                      <option value="last3months">Last 3 Months</option>
+                      <option value="last6months">Last 6 Months</option>
+                      <option value="yearly">Yearly</option>
+                    </select>
+                    <select class="form-control" id="transactionCategory">
+                      <option value="all">All Categories</option>
+                      <option value="Food">Food</option>
+                      <option value="Transport">Transport</option>
+                      <option value="Books">Books</option>
+                      <option value="Entertainment">Entertainment</option>
+                      <option value="Scholarship">Scholarship</option>
+                      <option value="Job">Job</option>
+                      <option value="Transfer to Savings">
+                        Transfer to Savings
+                      </option>
+                      <option value="Transfer from Savings">
+                        Transfer from Savings
+                      </option>
+                    </select>
+                    <button class="btn btn--outline" id="downloadTransactions">
+                      <i class="fas fa-download"></i>
+                      Export CSV
+                    </button>
+                  </div>
+                </div>
+                <div class="transactions-list" id="transactionsList">
+                  <!-- Transactions will be populated by JS -->
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Study Planner Section -->
+          <section class="section" id="study">
+            <div class="section-header">
+              <h2>Study Planner</h2>
+              <button class="btn btn--primary" id="addTaskBtn">
+                <i class="fas fa-plus"></i>
+                Add Task
+              </button>
+            </div>
+
+            <div class="study-grid">
+              <div class="pomodoro-timer">
+                <h3>Pomodoro Timer</h3>
+                <div class="timer-display">
+                  <div class="timer-circle">
+                    <span class="timer-time" id="timerDisplay">25:00</span>
+                    <span class="timer-label" id="timerLabel">Work Time</span>
+                  </div>
+                </div>
+                <div class="current-task" id="currentTaskDisplay">
+                  <p>Select a task to start timer</p>
+                </div>
+                <div class="timer-controls">
+                  <button class="btn btn--secondary" id="startTimer">
+                    Start
+                  </button>
+                  <button class="btn btn--outline" id="pauseTimer">
+                    Pause
+                  </button>
+                  <button class="btn btn--outline" id="resetTimer">
+                    Reset
+                  </button>
+                </div>
+              </div>
+
+              <div class="study-stats">
+                <h3>Study Statistics</h3>
+                <div class="stats-grid">
+                  <div class="stat-item">
+                    <span class="stat-value" id="completedTasks">1</span>
+                    <span class="stat-label">Completed</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-value" id="pendingTasks">2</span>
+                    <span class="stat-label">Pending</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-value" id="totalStudyHours">12</span>
+                    <span class="stat-label">Study Hours</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tasks-section">
+                <div class="tasks-header">
+                  <h3>Study Tasks</h3>
+                  <div class="task-selection-controls">
+                    <button
+                      class="btn btn--sm btn--outline"
+                      id="selectAllTasks"
+                    >
+                      Select All
+                    </button>
+                    <button
+                      class="btn btn--sm btn--outline"
+                      id="selectNoneTasks"
+                    >
+                      Select None
+                    </button>
+                    <button
+                      class="btn btn--sm btn--primary"
+                      id="startSelectedTimer"
+                      disabled
+                    >
+                      Start Timer for Selected
+                    </button>
+                  </div>
+                </div>
+                <div class="task-filters">
+                  <button class="filter-btn active" data-filter="all">
+                    All
+                  </button>
+                  <button class="filter-btn" data-filter="pending">
+                    Pending
+                  </button>
+                  <button class="filter-btn" data-filter="in-progress">
+                    In Progress
+                  </button>
+                  <button class="filter-btn" data-filter="completed">
+                    Completed
+                  </button>
+                  <button class="filter-btn" data-filter="high">
+                    High Priority
+                  </button>
+                  <button class="filter-btn" data-filter="assignment">
+                    From Assignments
+                  </button>
+                </div>
+                <div class="tasks-container" id="studyTasksList">
+                  <!-- Tasks will be populated by JS -->
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Quiz Section -->
+          <section class="section" id="quiz">
+            <div class="section-header">
+              <h2>Quiz Center</h2>
+              <button class="btn btn--primary" id="createQuizBtn">
+                <i class="fas fa-plus"></i>
+                Create Quiz
+              </button>
+            </div>
+
+            <div class="quiz-grid">
+              <div class="quiz-stats">
+                <h3>Quiz Performance</h3>
+                <div class="performance-stats">
+                  <div class="perf-item">
+                    <span class="perf-value" id="avgQuizScoreDisplay">85%</span>
+                    <span class="perf-label">Average Score</span>
+                  </div>
+                  <div class="perf-item">
+                    <span class="perf-value" id="totalQuizzes">2</span>
+                    <span class="perf-label">Total Quizzes</span>
+                  </div>
+                  <div class="perf-item">
+                    <span class="perf-value" id="totalAttempts">1</span>
+                    <span class="perf-label">Total Attempts</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="available-quizzes">
+                <h3>Available Quizzes</h3>
+                <div class="quizzes-list" id="quizzesList">
+                  <!-- Quizzes will be populated by JS -->
+                </div>
+              </div>
+
+              <div class="quiz-player hidden" id="quizPlayer">
+                <div class="quiz-header">
+                  <h3 id="quizTitle">Quiz Title</h3>
+                  <div class="quiz-info">
+                    <div class="quiz-progress">
+                      <span id="questionNumber">1</span> /
+                      <span id="totalQuestions">5</span>
+                    </div>
+                    <div class="quiz-timer" id="quizTimer">
+                      <i class="fas fa-clock"></i>
+                      <span id="timeRemaining">10:00</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="question-container">
+                  <h4 id="currentQuestion">Question will appear here</h4>
+                  <div class="options-container" id="optionsContainer">
+                    <!-- Options will be populated by JS -->
+                  </div>
+                </div>
+                <div class="quiz-controls">
+                  <button class="btn btn--outline" id="prevQuestion">
+                    Previous
+                  </button>
+                  <button class="btn btn--primary" id="nextQuestion">
+                    Next
+                  </button>
+                  <button class="btn btn--primary hidden" id="finishQuiz">
+                    Finish Quiz
+                  </button>
+                </div>
+              </div>
+
+              <div class="quiz-results hidden" id="quizResults">
+                <h3>Quiz Results</h3>
+                <div class="results-summary" id="resultsSummary">
+                  <!-- Results will be populated by JS -->
+                </div>
+                <div class="results-actions">
+                  <button class="btn btn--primary" id="retakeQuiz">
+                    Retake Quiz
+                  </button>
+                  <button class="btn btn--outline" id="backToQuizzes">
+                    Back to Quizzes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Notification Panel -->
+      <div class="notification-panel" id="notificationPanel">
+        <div class="notification-header">
+          <h3>Notifications</h3>
+          <button class="close-btn" id="closeNotifications">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="notifications-list" id="notificationsList">
+          <!-- Notifications will be populated by JS -->
+        </div>
+      </div>
+
+      <!-- Modals -->
+      <!-- Add/Edit Class Modal -->
+      <div class="modal hidden" id="addClassModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="classModalTitle">Add New Class</h3>
+            <button class="close-btn" id="closeClassModal">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form class="modal-form" id="addClassForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Subject Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="subject"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Course Code</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="code"
+                  placeholder="e.g., CS 301"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Instructor</label>
+              <input
+                type="text"
+                class="form-control"
+                name="instructor"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Days</label>
+              <div class="days-selection">
+                <div class="bulk-selection">
+                  <button
+                    type="button"
+                    class="btn btn--sm btn--outline"
+                    id="selectEveryDay"
+                  >
+                    Every Day
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn--sm btn--outline"
+                    id="selectWeekdays"
+                  >
+                    Weekdays Only
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn--sm btn--outline"
+                    id="selectWeekends"
+                  >
+                    Weekends Only
+                  </button>
+                </div>
+                <div class="day-checkboxes">
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="days" value="Monday" />
+                    <span>Monday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="days" value="Tuesday" />
+                    <span>Tuesday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="days" value="Wednesday" />
+                    <span>Wednesday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="days" value="Thursday" />
+                    <span>Thursday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="days" value="Friday" />
+                    <span>Friday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="days" value="Saturday" />
+                    <span>Saturday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="days" value="Sunday" />
+                    <span>Sunday</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Time</label>
+                <input type="time" class="form-control" name="time" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Duration (hours)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="duration"
+                  min="0.5"
+                  max="8"
+                  step="0.5"
+                  value="1.5"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Location</label>
+              <input
+                type="text"
+                class="form-control"
+                name="location"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Notes (Optional)</label>
+              <textarea
+                class="form-control"
+                name="notes"
+                rows="2"
+                placeholder="Any important notes about this class"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Current Assignment (Optional)</label>
+              <textarea
+                class="form-control"
+                name="assignment"
+                rows="2"
+                placeholder="Current assignment for this class"
+              ></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Status</label>
+                <select class="form-control" name="status">
+                  <option value="Upcoming">Upcoming</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Cancelled">Cancelled</option>
+                  <option value="Rescheduled">Rescheduled</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Color</label>
+                <input
+                  type="color"
+                  class="form-control"
+                  name="color"
+                  value="#3b82f6"
+                />
+              </div>
+            </div>
+            <input type="hidden" name="id" id="classId" />
+            <div class="modal-actions">
+              <button type="button" class="btn btn--outline" id="cancelClass">
+                Cancel
+              </button>
+              <button type="submit" class="btn btn--primary" id="submitClass">
+                Add Class
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Individual Day Deletion Modal -->
+      <div class="modal hidden" id="deleteDayModal">
+        <div class="modal-content small-modal">
+          <div class="modal-header">
+            <h3>Remove Day from Class</h3>
+            <button class="close-btn" id="closeDayModal">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="deleteDayMessage">
+              Are you sure you want to remove this day from the class schedule?
+            </p>
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn--outline" id="cancelDeleteDay">
+              Cancel
+            </button>
+            <button
+              class="btn btn--primary"
+              id="confirmDeleteDay"
+              style="background: var(--color-error)"
+            >
+              Remove Day
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add/Edit Transaction Modal -->
+      <div class="modal hidden" id="addTransactionModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="transactionModalTitle">Add Transaction</h3>
+            <button class="close-btn" id="closeTransactionModal">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form class="modal-form" id="addTransactionForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Type</label>
+                <select class="form-control" name="type" required>
+                  <option value="">Select Type</option>
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Amount (৳)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="amount"
+                  min="1"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-control" name="category" required>
+                <option value="">Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Books">Books</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Scholarship">Scholarship</option>
+                <option value="Job">Job</option>
+                <option value="Health">Health</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                name="description"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date</label>
+              <input type="date" class="form-control" name="date" required />
+            </div>
+            <input type="hidden" name="id" id="transactionId" />
+            <div class="modal-actions">
+              <button
+                type="button"
+                class="btn btn--outline"
+                id="cancelTransaction"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="btn btn--primary"
+                id="submitTransaction"
+              >
+                Add Transaction
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Savings Goal Management Modal -->
+      <div class="modal hidden" id="savingsActionModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="savingsActionTitle">Manage Savings Goal</h3>
+            <button class="close-btn" id="closeSavingsActionModal">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="savings-action-buttons">
+              <button
+                class="btn btn--secondary btn--full-width"
+                id="depositToGoal"
+              >
+                <i class="fas fa-arrow-down"></i>
+                Deposit to Goal
+              </button>
+              <button
+                class="btn btn--outline btn--full-width"
+                id="withdrawFromGoal"
+              >
+                <i class="fas fa-arrow-up"></i>
+                Withdraw from Goal
+              </button>
+            </div>
+            <div class="savings-action-form hidden" id="savingsActionForm">
+              <div class="form-group">
+                <label class="form-label" id="actionAmountLabel"
+                  >Amount (৳)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="actionAmount"
+                  min="1"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Description</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="actionDescription"
+                  required
+                />
+              </div>
+              <div class="modal-actions">
+                <button
+                  type="button"
+                  class="btn btn--outline"
+                  id="cancelSavingsAction"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  class="btn btn--primary"
+                  id="confirmSavingsAction"
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add/Edit Savings Goal Modal -->
+      <div class="modal hidden" id="addSavingsGoalModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="goalModalTitle">Add Savings Goal</h3>
+            <button class="close-btn" id="closeSavingsGoalModal">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form class="modal-form" id="addSavingsGoalForm">
+            <div class="form-group">
+              <label class="form-label">Goal Title</label>
+              <input type="text" class="form-control" name="title" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Target Amount (৳)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="target"
+                  min="1"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Current Amount (৳)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="current"
+                  min="0"
+                  value="0"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Deadline</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="deadline"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="form-control" name="category" required>
+                  <option value="">Select Category</option>
+                  <option value="Education">Education</option>
+                  <option value="Travel">Travel</option>
+                  <option value="Security">Emergency Fund</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Health">Health</option>
+                  <option value="Vehicle">Vehicle</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea
+                class="form-control"
+                name="description"
+                rows="3"
+                placeholder="Describe your savings goal..."
+              ></textarea>
+            </div>
+            <input type="hidden" name="id" id="goalId" />
+            <div class="modal-actions">
+              <button
+                type="button"
+                class="btn btn--outline"
+                id="cancelSavingsGoal"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="btn btn--primary"
+                id="submitSavingsGoal"
+              >
+                Add Goal
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Add/Edit Task Modal -->
+      <div class="modal hidden" id="addTaskModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="taskModalTitle">Add Study Task</h3>
+            <button class="close-btn" id="closeTaskModal">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form class="modal-form" id="addTaskForm">
+            <div class="form-group">
+              <label class="form-label">Task Title</label>
+              <input type="text" class="form-control" name="title" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Subject</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="subject"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Priority</label>
+                <select class="form-control" name="priority" required>
+                  <option value="">Select Priority</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Deadline</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="deadline"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Estimated Time (minutes)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="estimatedTime"
+                  min="15"
+                  step="15"
+                  required
+                />
+              </div>
+            </div>
+            <input type="hidden" name="id" id="taskId" />
+            <input
+              type="hidden"
+              name="sourceType"
+              id="taskSourceType"
+              value="manual"
+            />
+            <input type="hidden" name="sourceId" id="taskSourceId" />
+            <div class="modal-actions">
+              <button type="button" class="btn btn--outline" id="cancelTask">
+                Cancel
+              </button>
+              <button type="submit" class="btn btn--primary" id="submitTask">
+                Add Task
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Create/Edit Quiz Modal -->
+      <div class="modal hidden" id="createQuizModal">
+        <div class="modal-content large-modal">
+          <div class="modal-header">
+            <h3 id="quizModalTitle">Create New Quiz</h3>
+            <button class="close-btn" id="closeQuizModal">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form class="modal-form" id="createQuizForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Quiz Title</label>
+                <input type="text" class="form-control" name="title" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Subject</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="subject"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Difficulty</label>
+                <select class="form-control" name="difficulty" required>
+                  <option value="">Select Difficulty</option>
+                  <option value="Easy">Easy</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Hard">Hard</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Time Limit (minutes)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="timeLimit"
+                  min="1"
+                  max="180"
+                  value="10"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea
+                class="form-control"
+                name="description"
+                rows="2"
+                placeholder="Brief description of the quiz..."
+              ></textarea>
+            </div>
+
+            <div class="questions-section">
+              <div class="section-header">
+                <h4>Questions</h4>
+                <button
+                  type="button"
+                  class="btn btn--outline"
+                  id="addQuestionBtn"
+                >
+                  <i class="fas fa-plus"></i> Add Question
+                </button>
+              </div>
+              <div class="questions-list" id="questionsList">
+                <!-- Questions will be added dynamically -->
+              </div>
+            </div>
+
+            <input type="hidden" name="id" id="quizId" />
+            <div class="modal-actions">
+              <button type="button" class="btn btn--outline" id="cancelQuiz">
+                Cancel
+              </button>
+              <button type="submit" class="btn btn--primary" id="submitQuiz">
+                Create Quiz
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Delete Confirmation Modal -->
+      <div class="modal hidden" id="deleteConfirmModal">
+        <div class="modal-content small-modal">
+          <div class="modal-header">
+            <h3>Confirm Delete</h3>
+            <button class="close-btn" id="closeDeleteModal">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="deleteMessage">Are you sure you want to delete this item?</p>
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn--outline" id="cancelDelete">Cancel</button>
+            <button
+              class="btn btn--primary"
+              id="confirmDelete"
+              style="background: var(--color-error)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit User Name Modal -->
+      <div class="modal hidden" id="editNameModal">
+        <div class="modal-content small-modal">
+          <div class="modal-header">
+            <h3>Edit Name</h3>
+            <button class="close-btn" id="closeEditNameModal">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form class="modal-form" id="editNameForm">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                id="nameInput"
+                required
+              />
+            </div>
+            <div class="modal-actions">
+              <button
+                type="button"
+                class="btn btn--outline"
+                id="cancelEditName"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn--primary" id="saveUserName">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
